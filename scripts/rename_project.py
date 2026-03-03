@@ -18,7 +18,6 @@ import shutil
 import sys
 from pathlib import Path
 
-
 # Current project package name (Python module)
 CURRENT_NAME = "django_saas_template"
 
@@ -38,10 +37,7 @@ def normalize_project_name(name: str) -> str:
     normalized = re.sub(r"\W", "", normalized)
     normalized = normalized.lower()
     if not normalized:
-        raise ValueError(
-            "Project name must contain at least one letter or number. "
-            f"Got: {name!r}"
-        )
+        raise ValueError(f"Project name must contain at least one letter or number. Got: {name!r}")
     return normalized
 
 
@@ -93,9 +89,7 @@ def replace_in_file(file_path: Path, old: str, new: str) -> bool:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Rename the Django project to a new name (for template reuse)."
-    )
+    parser = argparse.ArgumentParser(description="Rename the Django project to a new name (for template reuse).")
     parser.add_argument(
         "name",
         help="New project name (e.g. my_app, my-app). Will be normalized to a valid Python module name.",
