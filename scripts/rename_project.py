@@ -2,12 +2,12 @@
 Rename this Django project to a new name. Use when reusing this template for a new project.
 
 Usage:
-    python rename_project.py <new_project_name>
+    python scripts/rename_project.py <new_project_name>
 
 Examples:
-    python rename_project.py my_app
-    python rename_project.py my-app      # hyphens become underscores
-    python rename_project.py "Acme Corp" # spaces/special chars become underscores
+    python scripts/rename_project.py my_app
+    python scripts/rename_project.py my-app      # hyphens become underscores
+    python scripts/rename_project.py "Acme Corp" # spaces/special chars become underscores
 
 The new name is normalized to a valid Python module name (lowercase, alphanumeric + underscores).
 """
@@ -44,11 +44,12 @@ def normalize_project_name(name: str) -> str:
 def find_project_root() -> Path:
     """Project root is the directory containing manage.py and the config package."""
     script_dir = Path(__file__).resolve().parent
-    if (script_dir / "manage.py").exists() and (script_dir / CURRENT_NAME).is_dir():
-        return script_dir
+    root = script_dir.parent
+    if (root / "manage.py").exists() and (root / CURRENT_NAME).is_dir():
+        return root
     raise SystemExit(
         "Error: Could not find project root (manage.py and django_saas_template/). "
-        "Run this script from the project root."
+        "Expected script at project_root/scripts/rename_project.py."
     )
 
 
