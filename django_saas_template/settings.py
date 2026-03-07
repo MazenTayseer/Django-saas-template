@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
-import sys
+from datetime import timedelta
 from pathlib import Path
 
 import dj_database_url
@@ -33,8 +33,6 @@ DEBUG = ENVIRONMENT == "development"
 ALLOWED_HOSTS = []
 CORS_ALLOW_ALL_ORIGINS = DEBUG
 
-sys.path.append(os.path.join(BASE_DIR, "apps"))
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,9 +43,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "rest_framework_simplejwt.token_blacklist",
     "corsheaders",
+    "phonenumber_field",
     # Django Apps
-    "core",
+    "apps.core",
+    "apps.accounts",
 ]
 
 MIDDLEWARE = [
@@ -129,8 +130,25 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+# Custom User Model
+AUTH_USER_MODEL = "core.User"
 
 # Rest Framework
 REST_FRAMEWORK = {
-    "EXCEPTION_HANDLER": "core.exception_handler.api_exception_handler",
+    "DEFAULT_AUTHENTICATION_CLASSES": ("rest_framework_simplejwt.authentication.JWTAuthentication",),
+    "EXCEPTION_HANDLER": "apps.core.exception_handler.api_exception_handler",
 }
+
+# Simple JWT
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+
+# Authentication
+AUTHENTICATION_BACKENDS = [
+    "apps.accounts.backends.EmailOrPhoneBackend",
+]
