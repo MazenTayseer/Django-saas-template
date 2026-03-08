@@ -1,7 +1,7 @@
 from rest_framework.response import Response
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import GenericViewSet
 
 
-class CoreView(ViewSet):
+class HelloWorldView(GenericViewSet):
     def list(self, request):
         return Response({"message": "Hello, World!"})
