@@ -8,7 +8,7 @@ from rest_framework import serializers
 User = get_user_model()
 
 
-class RegisterSerializer(serializers.Serializer):
+class SignupSerializer(serializers.Serializer):
     email = serializers.EmailField(required=False)
     phone_number = PhoneNumberField(required=False)
     password = serializers.CharField(write_only=True)

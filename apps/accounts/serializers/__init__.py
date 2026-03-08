@@ -1,9 +1,9 @@
 from .login import LoginSerializer
-from .register import RegisterSerializer
+from .signup import SignupSerializer
 from .user import UserSerializer
 
 __all__ = [
     "LoginSerializer",
-    "RegisterSerializer",
+    "SignupSerializer",
     "UserSerializer",
 ]

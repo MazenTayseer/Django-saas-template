@@ -2,12 +2,12 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from apps.accounts.serializers import RegisterSerializer, UserSerializer
+from apps.accounts.serializers import SignupSerializer, UserSerializer
 from apps.accounts.utils.tokens import get_tokens_for_user
 
 
-class RegisterView(GenericViewSet):
-    serializer_class = RegisterSerializer
+class SignupView(GenericViewSet):
+    serializer_class = SignupSerializer
 
     def create(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
