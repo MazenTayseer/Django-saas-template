@@ -11,7 +11,7 @@ class SignupTestCase(BaseTestCase):
     def setUp(self):
         super().setUp()
         self.client = APIClient()
-        self.url = reverse("signup-list")
+        self.url = reverse("signup")
 
     def test_signup_with_email_success(self):
         data = {

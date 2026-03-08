@@ -1,7 +1,7 @@
 from rest_framework.response import Response
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.views import APIView
 
 
-class HelloWorldView(GenericViewSet):
-    def list(self, request):
+class HelloWorldView(APIView):
+    def get(self, request):
         return Response({"message": "Hello, World!"})

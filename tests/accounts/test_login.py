@@ -10,7 +10,7 @@ class LoginTestCase(BaseTestCase):
     def setUp(self):
         super().setUp()
         self.client = APIClient()
-        self.url = reverse("login-list")
+        self.url = reverse("login")
         self.user = UserFactory(email="login@example.com", phone_number="+442071234568")
 
     def test_login_with_email_success(self):
