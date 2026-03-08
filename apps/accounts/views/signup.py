@@ -3,7 +3,6 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
 from apps.accounts.serializers import SignupSerializer, UserSerializer
-from apps.accounts.utils.tokens import get_tokens_for_user
 
 
 class SignupView(GenericAPIView):
@@ -16,7 +15,6 @@ class SignupView(GenericAPIView):
         return Response(
             {
                 "user": UserSerializer(user).data,
-                "tokens": get_tokens_for_user(user),
             },
             status=status.HTTP_201_CREATED,
         )

@@ -152,3 +152,6 @@ SIMPLE_JWT = {
 AUTHENTICATION_BACKENDS = [
     "apps.accounts.backends.EmailOrPhoneBackend",
 ]
+
+# Google OAuth
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")

@@ -21,10 +21,7 @@ class SignupTestCase(BaseTestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn("user", response.json())
-        self.assertIn("tokens", response.json())
         self.assertEqual(response.json()["user"]["email"], "user@example.com")
-        self.assertIn("access", response.json()["tokens"])
-        self.assertIn("refresh", response.json()["tokens"])
         self.assertTrue(User.objects.filter(email="user@example.com").exists())
 
     def test_signup_with_phone_success(self):
@@ -35,7 +32,6 @@ class SignupTestCase(BaseTestCase):
         response = self.client.post(self.url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertIn("user", response.json())
-        self.assertIn("tokens", response.json())
         self.assertTrue(User.objects.filter(phone_number="+442071234567").exists())
 
     def test_signup_with_email_and_phone_success(self):
